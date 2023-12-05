@@ -1,5 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ShoppingCartController.MobileApp.MainPage">
+             xmlns:model="clr-namespace:ShoppingCartController.MobileApp.Models"
+             xmlns:viewModel="clr-namespace:ShoppingCartController.MobileApp.ViewModels"
+             x:DataType="viewModel:ProductViewModel"
+             x:Class="ShoppingCartController.MobileApp.MainPage"
+             Title="{Binding Title}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.RowSpacing>
+            <OnPlatform x:TypeArguments="x:Double">
+                <On Platform="iOS">0</On>
+                <On Platform="Android">0</On>
+                <On Platform="UWP">0</On>
+            </OnPlatform>
+        </Grid.RowSpacing>
+        <Grid.ColumnSpacing>
+            <OnPlatform x:TypeArguments="x:Double">
+                <On Platform="iOS">0</On>
+                <On Platform="Android">5</On>
+                <On Platform="UWP">0</On>
+            </OnPlatform>
+        </Grid.ColumnSpacing>
+        <CollectionView Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        ItemsSource="{Binding ProductsCollection}"
+                        SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Product">
+                    <Grid Padding="13">
+                        <Frame HeightRequest="125">
+                            <Frame HeightRequest="125" Style="{StaticResource CardView}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                            <Grid Padding="0" ColumnDefinitions="120,*">
+                                <Image Aspect="AspectFit" Grid.Column="0" Grid.RowSpan="3"
+                                       Source="{Binding ImageUrl}"
+                                       HeightRequest="100" />
+                                <StackLayout Grid.Column="1"
+                                             Padding="10"
+                                             VerticalOptions="Center">
+                                    <Label Text="{Binding ProductName}" Style="{StaticResource CardTitle}" />
+                                    <Label Text="{Binding Price, StringFormat='Price: {0:N2} JOD'}" Style="{StaticResource CardPrice}" />
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <ActivityIndicator Grid.Row="0"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center" />
+        <Button Grid.Row="1"
+                Grid.Column="0"
+                Margin="10"
+                Text="Load Products"
+                BackgroundColor="{StaticResource Primary}"
+                Command="{Binding LoadProductsCommand}"
+                IsEnabled="{Binding IsNotBusy, Converter={StaticResource InverseBooleanConverter}}" />
+    </Grid>
 </ContentPage>

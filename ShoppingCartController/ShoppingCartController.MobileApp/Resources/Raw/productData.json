@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "barcode": "6294018804345",
+        "productName": "Fine Fluffy Sterialized Tissues",
+        "description": "Fine Fluffy sterialized double-layer tissues 170x2",
+        "price": 0.49,
+        "imageUrl": "https://images.deliveryhero.io/image/darkstores-jo/Jordan%20Items/JOR-6294018800750.jpg"
+    },
+    {
+        "id": 2,
+        "barcode": "6253009212859",
+        "productName": "Gersy Hand Sanitizer",
+        "description": "Gersy Hand Sanitizer 550ml",
+        "price": 3.99,
+        "imageUrl": "https://images.deliveryhero.io/image/darkstores-jo/Jordan%20Items/JOR-6253009212859.jpg"
+    },
+    {
+        "id": 3,
+        "barcode": "4032900113418",
+        "productName": "Winston Blue 100",
+        "description": "Winston Blue 100 cigarettes",
+        "price": 2.25,
+        "imageUrl": "https://images.deliveryhero.io/image/darkstores-jo/Jordan%20Items/JOR-4032900113418.jpg"
+    }
+]
